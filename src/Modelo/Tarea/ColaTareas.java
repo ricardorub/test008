@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Modelo.Tarea;
 
 import Modelo.Cola;
@@ -14,10 +18,14 @@ public class ColaTareas implements Cola {
 
     @Override
     public void encolar(Object obj) throws IllegalArgumentException {
+        if (!(obj instanceof Tarea)) {
+            // Optional: Add a check to ensure obj is a Tarea, though current code casts directly.
+            // throw new IllegalArgumentException("El objeto a encolar debe ser una instancia de Tarea.");
+        }
         Tarea tarea = (Tarea) obj;
         Nodo nuevo = new Nodo(tarea);
 
-        if (fin == null) {
+        if (fin == null) { // If queue is empty
             frente = fin = nuevo;
         } else {
             fin.setSiguiente(nuevo);
@@ -27,11 +35,11 @@ public class ColaTareas implements Cola {
 
     @Override
     public void desencolar() {
-        if (frente == null) {
+        if (frente == null) { // If queue is empty
             return;
         }
         frente = frente.getSiguiente();
-        if (frente == null) {
+        if (frente == null) { // If queue became empty after dequeuing
             fin = null;
         }
     }
@@ -48,16 +56,32 @@ public class ColaTareas implements Cola {
     }
 
     @Override
-
-    public Nodo getFrente() {
-        return frente;
+    public Nodo getFrente() { // Reverted to return Nodo to fix OperacionesColas
+        return this.frente;
     }
 
     @Override
-
     public boolean estaVacio() {
         return frente == null;
     }
 
+    @Override
+    public Object[] mostrarTodos() {
+        if (estaVacio()) {
+            return new Object[0]; // Return an empty array if the queue is empty
+        }
+
+        int cantidad = contarNodos();
+        Object[] todos = new Object[cantidad];
+        Nodo actual = frente;
+        int i = 0;
+        while (actual != null && i < cantidad) { 
+            todos[i] = actual.getDato(); 
+            actual = actual.getSiguiente();
+            i++;
+        }
+        return todos;
+    }
 }
+
 

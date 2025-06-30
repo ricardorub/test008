@@ -27,16 +27,17 @@ import java.util.concurrent.TimeUnit;
 public class Main {
 
     public static void main(String[] args) {
-        PanelReserva vista = new PanelReserva();
+        // Initialize data structures
         ListaDobleReservas listaReservas = new ListaDobleReservas();
         PilaHistorialReserva pilaHistorial = new PilaHistorialReserva();
-        ConsultasReservas consultas = new ConsultasReservas();
-        ListaSimpleClientes listaCliente = new ListaSimpleClientes();
+        ListaSimpleClientes listaCliente = new ListaSimpleClientes(); // Keep for other controllers if needed
         ListaCircularHabitaciones cirularHabitaciones = new ListaCircularHabitaciones();
         ArbolCheckOut arbolCheckOut = new ArbolCheckOut();
+        // ConsultasReservas consultas = new ConsultasReservas(); // This was duplicated by consultasReservas below. Remove one.
         
-        ConsultasReservas consultasReservas = new ConsultasReservas();
+        ConsultasReservas consultasReservas = new ConsultasReservas(); // If needed by other controllers
        
+        // Populate some data (example)
         Habitacion h101 = new Habitacion(101, "Simple", true); 
         Habitacion h102 = new Habitacion(102, "Doble", true);  
         Habitacion h201 = new Habitacion(201, "Suite", true); 
@@ -44,15 +45,27 @@ public class Main {
         cirularHabitaciones.agregarAlFinal(h102);
         cirularHabitaciones.agregarAlFinal(h201);
         
-        new ControladorReservas(vista, pilaHistorial, listaReservas, consultas,listaCliente,cirularHabitaciones);
-        new ControladorTareas(vista);
+        // Cliente cliente1 = new Cliente("12345678A", "Juan Perez", 5); // Example data
+        // Cliente cliente2 = new Cliente("87654321B", "Ana Lopez", 2); // Example data
+        // listaCliente.agregarAlFinal(cliente1); // Example data for listaCliente
+        // listaCliente.agregarAlFinal(cliente2); // Example data for listaCliente
 
-        Cliente cliente1 = new Cliente("12345678A", "Juan Perez", 5);
-        Cliente cliente2 = new Cliente("87654321B", "Ana Lopez", 2);
+        // Create PanelPrincipal with necessary dependencies for PanelCheckOut controller
+        PanelPrincipal vista = new PanelPrincipal(arbolCheckOut, listaReservas, cirularHabitaciones, pilaHistorial);
         
-         
-        /////ver luego
+        // TODO: ControladorReservas and ControladorTareas were associated with PanelReserva.
+        // If PanelReserva is opened from PanelPrincipal, its controller setup will need
+        // to happen in PanelPrincipal's actionPerformed for the Reserva button, passing these dependencies.
+        // Example of what might be needed in PanelPrincipal for Reserva button:
+        // PanelReserva panelReserva = new PanelReserva();
+        // ControladorReservas ctrlReservas = new ControladorReservas(panelReserva, this.pilaHistorial, this.listaTotalReservas, /*consultas*/, /*listaCliente*/, this.listaHabitaciones);
+        // new ControladorTareas(panelReserva); // If ControladorTareas is still relevant
+        // panelReserva.setVisible(true);
+        // this.dispose();
+        
         vista.setVisible(true);
         vista.setLocationRelativeTo(null);
     }
 }
+
+
