@@ -5,10 +5,15 @@ package Vista;
  * @author Alicia Huamani
  */
 import Controlador.ControladorCheckOut;
+import Controlador.ControladorClientes;
+import Controlador.ControladorReservas;
+import Controlador.ControladorTareas;
 import Modelo.CheckOut.ArbolCheckOut;
 import Modelo.Habitacion.ListaCircularHabitaciones;
 import Modelo.Historial.PilaHistorialReserva;
 import Modelo.Reservas.ListaDobleReservas;
+import Modelo.Cliente.*;
+import Modelo.Reservas.ConsultasReservas;
 
 public class PanelPrincipal extends javax.swing.JFrame {
 
@@ -16,18 +21,38 @@ public class PanelPrincipal extends javax.swing.JFrame {
     private ListaDobleReservas listaTotalReservas;
     private ListaCircularHabitaciones listaHabitaciones;
     private PilaHistorialReserva pilaHistorial;
+    private ArbolCliente arbolClientes;
+    private ListaSimpleClientes listaEsperaClientes;
+    private ColaTurnosClientes colaTurnosClientes;
+    private PilaModificacionesCliente pilaModificacionesClientes;
+    private ConsultasClientes consultasClientes;
+    private ConsultasReservas consultasReservas;
+    
 
     /**
      * Creates new form PanelPrincipal
      */
-    public PanelPrincipal(ArbolCheckOut arbolCheckOut,
-                           ListaDobleReservas listaTotalReservas,
-                           ListaCircularHabitaciones listaHabitaciones,
-                           PilaHistorialReserva pilaHistorial) {
+    public PanelPrincipal(
+            ArbolCheckOut arbolCheckOut,
+            ListaDobleReservas listaTotalReservas,
+            ListaCircularHabitaciones listaHabitaciones,
+            PilaHistorialReserva pilaHistorial,
+            ArbolCliente arbolClientes,
+            ListaSimpleClientes listaEsperaClientes,
+            ColaTurnosClientes colaTurnosClientes,
+            PilaModificacionesCliente pilaModificacionesClientes,
+            ConsultasClientes consultasClientes,
+            ConsultasReservas consultasReservas) {
         this.arbolCheckOut = arbolCheckOut;
         this.listaTotalReservas = listaTotalReservas;
         this.listaHabitaciones = listaHabitaciones;
         this.pilaHistorial = pilaHistorial;
+        this.arbolClientes = arbolClientes;
+        this.listaEsperaClientes = listaEsperaClientes;
+        this.colaTurnosClientes = colaTurnosClientes;
+        this.pilaModificacionesClientes = pilaModificacionesClientes;
+        this.consultasClientes = consultasClientes;
+        this.consultasReservas=consultasReservas;
         initComponents();
     }
 
@@ -37,9 +62,8 @@ public class PanelPrincipal extends javax.swing.JFrame {
         // This constructor might lead to NullPointerExceptions if dependencies are not set
         // and actions requiring them are triggered. Consider initializing with defaults
         // or disabling components if dependencies are null.
-        System.err.println("Warning: PanelPrincipal created without dependencies. CheckOut functionality may fail.");
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,59 +114,74 @@ public class PanelPrincipal extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton4)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton3)
-                                .addComponent(jButton1)
-                                .addComponent(jLabel1))
-                            .addGap(18, 18, 18))))
-                .addContainerGap(170, Short.MAX_VALUE))
+                                .addGap(149, 149, 149)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton2)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jButton4)
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(jButton3)
+                                                                .addComponent(jButton1)
+                                                                .addComponent(jLabel1))
+                                                        .addGap(18, 18, 18))))
+                                .addContainerGap(170, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addGap(12, 12, 12)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
-                .addContainerGap(88, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton2)
+                                .addGap(12, 12, 12)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton4)
+                                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>                        
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         PanelCliente panelCliente = new PanelCliente();
+
+        new ControladorClientes(panelCliente,
+                this.arbolClientes,
+                this.listaEsperaClientes,
+                this.colaTurnosClientes,
+                this.pilaModificacionesClientes,
+                this.consultasClientes);
+
         panelCliente.setVisible(true);
         this.dispose();
-    }                                        
+    }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         PanelHabitaciones panelHabitaciones = new PanelHabitaciones();
         panelHabitaciones.setVisible(true);
         this.dispose();
-    }                                        
+    }
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
         PanelReserva panelReserva = new PanelReserva();
+     
+        new ControladorReservas(
+                panelReserva, this.pilaHistorial, 
+                this.listaTotalReservas, 
+                this.consultasReservas, 
+                this.listaEsperaClientes, 
+                this.listaHabitaciones);
         panelReserva.setVisible(true);
         this.dispose();
-    }                                        
+    }
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         PanelCheckOut panelCheckOut = new PanelCheckOut();
         // Ensure dependencies were injected into PanelPrincipal
         if (this.arbolCheckOut == null || this.listaTotalReservas == null || this.listaHabitaciones == null || this.pilaHistorial == null) {
@@ -151,15 +190,15 @@ public class PanelPrincipal extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Error de configuración interna. No se puede abrir Check-Out.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
-        ControladorCheckOut controladorCheckOut = new ControladorCheckOut(panelCheckOut, 
-                                                                        this.arbolCheckOut, 
-                                                                        this.listaTotalReservas, 
-                                                                        this.listaHabitaciones, 
-                                                                        this.pilaHistorial);
+        ControladorCheckOut controladorCheckOut = new ControladorCheckOut(panelCheckOut,
+                this.arbolCheckOut,
+                this.listaTotalReservas,
+                this.listaHabitaciones,
+                this.pilaHistorial);
         panelCheckOut.setControlador(controladorCheckOut);
         panelCheckOut.setVisible(true);
         this.dispose();
-    }                                        
+    }
 
     /**
      * @param args the command line arguments

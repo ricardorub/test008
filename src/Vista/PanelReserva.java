@@ -815,7 +815,10 @@ public class PanelReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_txtidConsultasRActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
+        PanelPrincipal menu = new PanelPrincipal();
+        menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
@@ -990,7 +993,7 @@ public class PanelReserva extends javax.swing.JFrame {
 
     public javax.swing.JTextField getTxtBusquedaCliente() {
         return txtBusquedaCliente;
-        
+
     }
 
     public void setTxtIdReservas(javax.swing.JTextField txtIdReservas) {

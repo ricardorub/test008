@@ -1,5 +1,7 @@
 package Vista;
 
+//autor : Ricardo Ruben Gutierrez Espinoza
+
 import Controlador.ControladorCheckOut;
 import Modelo.Cliente.Cliente;
 import Modelo.Habitacion.Habitacion;
@@ -31,6 +33,7 @@ public class PanelCheckOut extends javax.swing.JFrame {
         txtFechaEntrada.setEditable(false);
         txtTelefono.setEditable(false); // Will display Room Type
         txtNumDias.setEditable(false);
+        btnRealizarCheckOut.setVisible(false); // Make the button invisible
     }
 
     public void setControlador(ControladorCheckOut controlador) {
@@ -67,17 +70,18 @@ public class PanelCheckOut extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         txtFechaEntrada = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel(); // Will be "Número de Habitación"
         jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         txtTelefono = new javax.swing.JTextField();
         txtNumDias = new javax.swing.JTextField();
         txtFechaSalida = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel(); // Will be "Tipo de Habitación"
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnRealizarCheckOut = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
@@ -88,7 +92,8 @@ public class PanelCheckOut extends javax.swing.JFrame {
 
         jLabel3.setText("Nombre del cliente");
 
-        jLabel5.setText("Email");
+        // jLabel5.setText("Email"); // Original
+        jLabel5.setText("Número de Habitación"); // Changed Label Text
 
         jLabel7.setText("Fecha de Entrada");
 
@@ -131,7 +136,9 @@ public class PanelCheckOut extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Telefono del cliente");
+        // jLabel4.setText("Telefono del cliente"); // Original
+        jLabel4.setText("Tipo de Habitación"); // Changed Label Text
+
 
         jLabel6.setText("Numero de dias");
 
@@ -145,11 +152,12 @@ public class PanelCheckOut extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-                    .addComponent(txtTelefono)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-                    .addComponent(txtNumDias)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtFechaSalida))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtTelefono)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                        .addComponent(txtNumDias)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtFechaSalida)))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -170,22 +178,38 @@ public class PanelCheckOut extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        jButton1.setText("Limpiar");
+        btnRealizarCheckOut.setText("Realizar Check-Out");
+        btnRealizarCheckOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRealizarCheckOutActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(399, 399, 399)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(219, 219, 219)
+                .addComponent(btnRealizarCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRealizarCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -196,9 +220,15 @@ public class PanelCheckOut extends javax.swing.JFrame {
         });
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
-        jLabel1.setText("Numero de Habitacion");
+        jLabel1.setText("ID de Reserva"); 
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Check Out");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -447,7 +477,8 @@ public class PanelCheckOut extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnRealizarCheckOut;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

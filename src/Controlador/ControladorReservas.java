@@ -29,6 +29,7 @@ public class ControladorReservas {
     ConsultasReservas consul;
     ListaSimpleClientes listaCliente;
     ListaCircularHabitaciones cirularHabitaciones;
+    
 
     public ControladorReservas(PanelReserva vista, PilaHistorialReserva pila, ListaDobleReservas lista, ConsultasReservas consul, ListaSimpleClientes listaCliente, ListaCircularHabitaciones cirularHabitaciones) {
         this.vista = vista;
@@ -42,14 +43,14 @@ public class ControladorReservas {
         Cliente cliente2 = new Cliente("23456789B", "Ana Gómez", 2);
         Cliente cliente3 = new Cliente("34567890C", "Carlos López", 10);
         Cliente cliente4 = new Cliente("45678901D", "Laura Martínez", 1);
-        Cliente cliente5 = new Cliente("123", "lala", 1);
+        Cliente cliente5 = new Cliente("123", "lala", 1);//cliente de prueba para registrar reserva
         listaCliente.agregarAlFinal(cliente5);
 
         Habitacion habitacion1 = new Habitacion(101, "Individual", true);
         Habitacion habitacion2 = new Habitacion(102, "Doble", false);
         Habitacion habitacion3 = new Habitacion(201, "Suite", true);
         Habitacion habitacion4 = new Habitacion(202, "Triple", true);
-        Habitacion habitacion6 = new Habitacion(203, "segund", false);
+        Habitacion habitacion6 = new Habitacion(203, "segund", false);//habitacion de prueba para registrar reserva
         cirularHabitaciones.agregarAlFinal(habitacion6);
 
         Reserva reserva1 = new Reserva(1, cliente1, habitacion1, "2025-07-01");
@@ -99,14 +100,14 @@ public class ControladorReservas {
         Cliente c = listaCliente.buscarPorDni(vista.getTxtDniCliente().getText());
 
         if (c == null) {
-            JOptionPane.showMessageDialog(vista, "Cliente no encontrado.");
+            JOptionPane.showMessageDialog(vista, "El cliente primero debe estar registrado.");
             return;  
         }
 
         Habitacion h = (Habitacion) cirularHabitaciones.buscarPorId(Integer.parseInt(vista.getTxtIdHabitacion().getText()));
 
         if (h == null) {
-            JOptionPane.showMessageDialog(vista, "Habitación no encontrada.");
+            JOptionPane.showMessageDialog(vista, "Habitación debe estar Registrada.");
             return;  
         }
         

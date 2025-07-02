@@ -1,8 +1,10 @@
 package Modelo.CheckOut;
 
-import Modelo.NodoABB; // Assuming NodoABB can handle int comparison if needed, or we compare within ArbolCheckOut
+//Autor : Ricardo Ruben Gutierrez Espinoza
+
+import Modelo.NodoABB; 
 import Modelo.Reservas.Reserva;
-// Import ListaSimpleClientes for obtaining all reservations, if still needed.
+
 import Modelo.Cliente.ListaSimpleClientes; 
 
 public class ArbolCheckOut {

@@ -83,5 +83,3 @@ public class ColaTareas implements Cola {
         return todos;
     }
 }
-
-

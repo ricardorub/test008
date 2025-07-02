@@ -11,17 +11,21 @@ import Modelo.Historial.PilaHistorialReserva;
 import Modelo.Reservas.ConsultasReservas;
 import Vista.PanelReserva;
 import Modelo.CheckOut.ArbolCheckOut;    
+import Modelo.Cliente.ArbolCliente;
 
 import Vista.PanelReserva;
 import Vista.PanelCheckOut; 
+import Vista.PanelCliente;
 import Vista.PanelPrincipal;
 
-import Modelo.Cliente.Cliente;
+import Modelo.Cliente.*;
 import Modelo.Habitacion.Habitacion;
 import Modelo.Reservas.Reserva;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import Modelo.Cliente.*;
 
 
 public class Main {
@@ -33,9 +37,17 @@ public class Main {
         ListaSimpleClientes listaCliente = new ListaSimpleClientes(); // Keep for other controllers if needed
         ListaCircularHabitaciones cirularHabitaciones = new ListaCircularHabitaciones();
         ArbolCheckOut arbolCheckOut = new ArbolCheckOut();
+        ConsultasReservas consultasReservas = new ConsultasReservas(); // If needed by other controllers
+        
+        //Estructura del cliente
+        ArbolCliente arbolClientes = new ArbolCliente();
+        ListaSimpleClientes listaEsperaClientes = new ListaSimpleClientes();
+        ColaTurnosClientes colaTurnosClientes = new ColaTurnosClientes();
+        PilaModificacionesCliente pilaModificacionesClientes = new PilaModificacionesCliente();
+        ConsultasClientes consultasClientes = new ConsultasClientes();
         // ConsultasReservas consultas = new ConsultasReservas(); // This was duplicated by consultasReservas below. Remove one.
         
-        ConsultasReservas consultasReservas = new ConsultasReservas(); // If needed by other controllers
+        PanelCliente panelCliente = new PanelCliente();
        
         // Populate some data (example)
         Habitacion h101 = new Habitacion(101, "Simple", true); 
@@ -45,13 +57,18 @@ public class Main {
         cirularHabitaciones.agregarAlFinal(h102);
         cirularHabitaciones.agregarAlFinal(h201);
         
-        // Cliente cliente1 = new Cliente("12345678A", "Juan Perez", 5); // Example data
-        // Cliente cliente2 = new Cliente("87654321B", "Ana Lopez", 2); // Example data
-        // listaCliente.agregarAlFinal(cliente1); // Example data for listaCliente
-        // listaCliente.agregarAlFinal(cliente2); // Example data for listaCliente
+        //Cliente cliente1 = new Cliente("12345678A", "Juan Perez", 5); // Example data
+        //Cliente cliente2 = new Cliente("87654321B", "Ana Lopez", 2); // Example data
+        //listaCliente.agregarAlFinal(cliente1); // Example data for listaCliente
+        //listaCliente.agregarAlFinal(cliente2); // Example data for listaCliente
 
         // Create PanelPrincipal with necessary dependencies for PanelCheckOut controller
-        PanelPrincipal vista = new PanelPrincipal(arbolCheckOut, listaReservas, cirularHabitaciones, pilaHistorial);
+        PanelPrincipal vista = new PanelPrincipal(arbolCheckOut, listaReservas, cirularHabitaciones, pilaHistorial,
+            arbolClientes,
+            listaEsperaClientes,
+            colaTurnosClientes,
+            pilaModificacionesClientes,
+            consultasClientes,consultasReservas);
         
         // TODO: ControladorReservas and ControladorTareas were associated with PanelReserva.
         // If PanelReserva is opened from PanelPrincipal, its controller setup will need
